@@ -1,5 +1,7 @@
 scraps/*
 scraps/
 
+spec/
+
 *.sqlite3
 *.db

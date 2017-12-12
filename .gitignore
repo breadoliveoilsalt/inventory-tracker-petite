@@ -1,0 +1,5 @@
+scraps/*
+scraps/
+
+*.sqlite3
+*.db

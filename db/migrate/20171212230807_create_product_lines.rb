@@ -6,6 +6,8 @@ class CreateProductLines < ActiveRecord::Migration
       t.float :cost_to_make
       t.float :sale_price
       t.string :description
+      t.integer :user_id
+      t.timestamps null: true
     end
   end
 end

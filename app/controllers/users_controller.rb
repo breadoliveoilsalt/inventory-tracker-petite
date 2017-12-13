@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       redirect to "/"
     else
       @user = User.create(params)
-      session[:id] = @user.id
+      session[:user_id] = @user.id
       erb :'users/home' # Not sure if this is right from a RESTful perspective but running with it for now
     end
   end
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   post '/users/login' do
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
-      session[:id] = @user.id
+      session[:user_id] = @user.id
       erb :'/users/home'
     else
       redirect to "/"

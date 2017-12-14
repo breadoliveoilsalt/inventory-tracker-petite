@@ -16,3 +16,9 @@
   <input type="submit" name="" value="Edit Seller">
 
 </form>
+
+<form class="" action="/sellers/<%= @seller.id %>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+
+  <input type="submit" name="" value="Delete Seller">
+</form>

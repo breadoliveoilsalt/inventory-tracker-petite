@@ -63,6 +63,14 @@ class SellersController < ApplicationController
 
   end
 
+  delete '/sellers/:id/delete' do
+    # Here and in patch, build in that you can't do this unless
+    # session[:id] == seller.user_id (or seller.user == current_user)
+    seller = Seller.find(params[:id])
+    seller.delete
+    redirect to '/users/home'
+  end
+
   helpers do
 
     def valid_date?(date_data)

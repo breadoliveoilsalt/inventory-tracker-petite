@@ -6,12 +6,14 @@ class SellersController < ApplicationController
       erb :"/sellers/create_seller"
     else
       redirect to '/users/login'
+      # Flash: consider flash error message to please log in
     end
   end
 
 
   post '/sellers' do # post request to add a new seller
-    if params[:seller][:seller_name] == ""
+    if name_blank?
+      # Flash: consider flash error message to please at least enter name
       "Please enter at least a name."
     else
       seller = Seller.create(seller_name: params[:seller][:seller_name], user_id: current_user.id)
@@ -41,12 +43,13 @@ class SellersController < ApplicationController
       erb :'sellers/edit_seller'
     else
       redirect to '/'
+      # Flash: consider flash error message to please log in
     end
   end
 
-  patch '/sellers/:id' do
-    binding.pry
-    if params[:seller][:seller_name] == ""
+  patch '/sellers/:id' do # patch request to edit seller
+    if name_blank?
+      # Flash: consider flash error message to please enter at least name
       "Please enter at least a name."
     else
       seller = Seller.find(params[:id])
@@ -54,16 +57,15 @@ class SellersController < ApplicationController
       if valid_date?(params[:start_date])
         seller.start_date = create_date_object(params[:start_date])
       else
-        #Need flash to work:
+        # Flash: consider flash error message to please enter valid date or something
         "Start Date not entered or invalid. Click edit below to add start Date"
       end
       seller.save
       redirect to "/sellers/#{seller.id}"
     end
-
   end
 
-  delete '/sellers/:id/delete' do
+  delete '/sellers/:id/delete' do # delete request to edit seller
     # Here and in patch, build in that you can't do this unless
     # session[:id] == seller.user_id (or seller.user == current_user)
     seller = Seller.find(params[:id])
@@ -82,6 +84,10 @@ class SellersController < ApplicationController
       month = date_data[:month].to_i
       day = date_data[:day].to_i
       Date.new(year, month, day)
+    end
+
+    def name_blank?
+      params[:seller][:seller_name] == ""
     end
 
   end # end of helpers

@@ -11,10 +11,10 @@ class SellersController < ApplicationController
 
 
   post '/sellers' do # post request to add a new seller
-    if params[:seller_name] == ""
+    if params[:seller][:seller_name] == ""
       "Please enter at least a name."
     else
-      seller = Seller.create(seller_name: params[:seller_name], user_id: current_user.id)
+      seller = Seller.create(seller_name: params[:seller][:seller_name], user_id: current_user.id)
       if valid_date?(params[:start_date])
         seller.start_date = create_date_object(params[:start_date])
         seller.save
@@ -32,6 +32,33 @@ class SellersController < ApplicationController
       erb :'sellers/show_seller'
     else
       redirect to '/'
+    end
+  end
+
+  get '/sellers/:id/edit' do
+    if logged_in?
+      @seller = Seller.find(params[:id])
+      erb :'sellers/edit_seller'
+    else
+      redirect to '/'
+    end
+  end
+
+  patch '/sellers/:id' do
+    binding.pry
+    if params[:seller][:seller_name] == ""
+      "Please enter at least a name."
+    else
+      seller = Seller.find(params[:id])
+      seller.update(params[:seller])
+      if valid_date?(params[:start_date])
+        seller.start_date = create_date_object(params[:start_date])
+      else
+        #Need flash to work:
+        "Start Date not entered or invalid. Click edit below to add start Date"
+      end
+      seller.save
+      redirect to "/sellers/#{seller.id}"
     end
 
   end

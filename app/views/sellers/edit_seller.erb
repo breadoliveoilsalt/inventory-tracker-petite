@@ -1,11 +1,11 @@
-
 <h1> <a href="/users/home">Home</a> || <a href="/users/logout">Log Out</a> </h1>
 
-<h2>Add a Seller:</h2>
+<h2>Edit Seller:</h2>
 
-<form class="" action="/sellers" method="post">
+<form class="" action="/sellers/<%= @seller.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
 
-  <h3> Seller's Name: <input type="text" name="seller[seller_name]" value=""> </h3>
+  <h3> Seller's Name: <input type="text" name="seller[seller_name]" value="<%= @seller.seller_name %>"> </h3>
 
   <h3> Seller's Start Date (optional): </h3>
     <h4> Month (1 - 12): <input type="text" name="start_date[month]" value=""> </h4>
@@ -13,6 +13,6 @@
     <h4> Year: <input type="text" name="start_date[year]" value=""> </h4>
 
 
-  <input type="submit" name="" value="Add Seller">
+  <input type="submit" name="" value="Edit Seller">
 
 </form>

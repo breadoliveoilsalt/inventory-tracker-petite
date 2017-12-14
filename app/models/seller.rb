@@ -13,4 +13,15 @@ class Seller < ActiveRecord::Base
     end
   end
 
+  def month_to_s
+    self.start_date.month.to_s
+  end
+
+  def day_to_s
+    self.start_date.day.to_s
+  end
+
+  def year_to_s
+    self.start_date.year.to_s
+  end
 end

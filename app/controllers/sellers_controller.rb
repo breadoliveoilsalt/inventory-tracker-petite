@@ -2,12 +2,17 @@ class SellersController < ApplicationController
 
 
   get '/sellers/new' do # request for form to create new seller
+    #flash in scope here?
     if logged_in?
       erb :"/sellers/create_seller"
     else
+      flash[:message] = "Please log in."
+      puts "hello"
+      puts "#{flash[:message]}"
       redirect to '/users/login'
       # Flash: consider flash error message to please log in
     end
+
   end
 
 

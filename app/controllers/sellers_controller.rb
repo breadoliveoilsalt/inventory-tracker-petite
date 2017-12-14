@@ -19,12 +19,22 @@ class SellersController < ApplicationController
         seller.start_date = create_date_object(params[:start_date])
         seller.save
       else
-        # Need Flash -- Start Date not entered or invalid.  Click "edit" below to add start Date
+        #Need flash to work:
+        "Start Date not entered or invalid. Click edit below to add start Date"
       end
-
+      redirect to "/sellers/#{seller.id}"
     end
   end
 
+  get '/sellers/:id' do
+    if logged_in?
+      @seller = Seller.find(params[:id])
+      erb :'sellers/show_seller'
+    else
+      redirect to '/'
+    end
+
+  end
 
   helpers do
 

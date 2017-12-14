@@ -2,32 +2,26 @@ class SellersController < ApplicationController
 
 
   get '/sellers/new' do # request for form to create new seller
-    #flash in scope here?
     if logged_in?
       erb :"/sellers/create_seller"
     else
-      flash[:message] = "Please log in."
-      puts "hello"
-      puts "#{flash[:message]}"
+      flash[:message] = "**** Please log in first ****"
       redirect to '/users/login'
-      # Flash: consider flash error message to please log in
     end
 
   end
 
-
   post '/sellers' do # post request to add a new seller
     if name_blank?
-      # Flash: consider flash error message to please at least enter name
-      "Please enter at least a name."
+      flash[:message] = "**** Error: Please enter at least a name ****"
+      redirect to '/sellers/new'
     else
       seller = Seller.create(seller_name: params[:seller][:seller_name], user_id: current_user.id)
       if valid_date?(params[:start_date])
         seller.start_date = create_date_object(params[:start_date])
         seller.save
       else
-        #Need flash to work:
-        "Start Date not entered or invalid. Click edit below to add start Date"
+        flash[:message] = "**** Note: Start date was not entered or was invalid. Click edit to add a start date ****"
       end
       redirect to "/sellers/#{seller.id}"
     end
@@ -38,7 +32,8 @@ class SellersController < ApplicationController
       @seller = Seller.find(params[:id])
       erb :'sellers/show_seller'
     else
-      redirect to '/'
+      flash[:message] = "**** Please log in first ****"
+      redirect to '/users/login'
     end
   end
 
@@ -47,23 +42,23 @@ class SellersController < ApplicationController
       @seller = Seller.find(params[:id])
       erb :'sellers/edit_seller'
     else
-      redirect to '/'
-      # Flash: consider flash error message to please log in
+      flash[:message] = "**** Please log in first ****"
+      redirect to '/users/login'
     end
   end
 
   patch '/sellers/:id' do # patch request to edit seller
+    seller = Seller.find(params[:id])
     if name_blank?
-      # Flash: consider flash error message to please enter at least name
-      "Please enter at least a name."
+      flash[:message] = "**** Error: Please enter at least a name **** "
+      redirect to "sellers/#{seller.id}/edit"
     else
-      seller = Seller.find(params[:id])
       seller.update(params[:seller])
       if valid_date?(params[:start_date])
         seller.start_date = create_date_object(params[:start_date])
       else
-        # Flash: consider flash error message to please enter valid date or something
-        "Start Date not entered or invalid. Click edit below to add start Date"
+        seller.start_date = nil
+        flash[:message] = " **** Note: Start date was not entered or was invalid. Click edit to add a start date ****"
       end
       seller.save
       redirect to "/sellers/#{seller.id}"

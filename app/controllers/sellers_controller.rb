@@ -40,6 +40,8 @@ class SellersController < ApplicationController
   get '/sellers/:id/edit' do
     @seller = Seller.find(params[:id])
     if logged_in?
+      # Immediately below is the gatekeeper preventing users from editing or deleting sellers 
+      # that they did not create
       if @seller.user != current_user
         flash[:message] = "**** You do not have permission to edit this seller ****"
         redirect to "/sellers/#{@seller.id}"
@@ -71,8 +73,6 @@ class SellersController < ApplicationController
   end
 
   delete '/sellers/:id/delete' do # delete request to edit seller
-    # Here and in patch, build in that you can't do this unless
-    # session[:id] == seller.user_id (or seller.user == current_user)
     seller = Seller.find(params[:id])
     seller.delete
     redirect to '/users/home'

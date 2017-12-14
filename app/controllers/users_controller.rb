@@ -10,11 +10,12 @@ class UsersController < ApplicationController
 
   post '/users/signup' do
     if params[:username] == "" || params[:password] == ""
-      redirect to "/"
+      flash[:message] = "**** Error: Incomplete credentials ****"
+      redirect to "/users/signup"
     else
       @user = User.create(params)
       session[:user_id] = @user.id
-      erb :'users/home' # Not sure if this is right from a RESTful perspective but running with it for now
+      redirect to "/users/home"
     end
   end
 
@@ -32,7 +33,8 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       erb :'/users/home'
     else
-      redirect to "/"
+      flash[:message] = "**** Error: Invalid log in credentials ****"
+      redirect to "/users/login"
     end
   end
 
@@ -41,6 +43,7 @@ class UsersController < ApplicationController
       @user = current_user
       erb :"users/home"
     else
+      flash[:message] = "**** Please log in first ****"
       redirect to "/users/login"
     end
   end

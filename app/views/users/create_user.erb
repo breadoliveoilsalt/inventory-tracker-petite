@@ -1,8 +1,11 @@
 
+    <% if flash[:message] %>
+      <h2> <%= flash[:message] %> </h2>
+    <% end %>
 
+    <h1>Create a User Account</h1>
+    
     <form class="" action="/users/signup" method="post">
-
-      <h1>Create a User Account</h1>
 
       <h2> Username: <input type="text" name="username" value=""> </h2>
       <h2> Password: <input type="text" name="password" value=""> </h2>

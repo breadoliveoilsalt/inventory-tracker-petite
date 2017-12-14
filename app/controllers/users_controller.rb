@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
 
   get '/users/signup' do
-    # if logged_in?
-    #   redirect to "/tweets"
-    # else
+    if logged_in?
+      redirect to "/users/home"
+    else
       erb :'users/create_user'
-    # end
+    end
   end
 
   post '/users/signup' do
@@ -19,11 +19,11 @@ class UsersController < ApplicationController
   end
 
   get '/users/login' do
-    # if logged_in?
-    #   redirect to "/tweets"
-    # else
+    if logged_in?
+      redirect to "/users/home"
+    else
       erb :'users/login'
-    # end
+    end
   end
 
   post '/users/login' do
@@ -46,13 +46,12 @@ class UsersController < ApplicationController
   end
 
   get '/users/logout' do
-    # if logged_in?
+    if logged_in?
       session.clear
       redirect to "/users/login"
-    # else
+    else
       redirect to '/'
-    # end
-
+    end
   end
 
 end

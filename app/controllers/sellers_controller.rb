@@ -38,9 +38,14 @@ class SellersController < ApplicationController
   end
 
   get '/sellers/:id/edit' do
+    @seller = Seller.find(params[:id])
     if logged_in?
-      @seller = Seller.find(params[:id])
-      erb :'sellers/edit_seller'
+      if @seller.user != current_user
+        flash[:message] = "**** You do not have permission to edit this seller ****"
+        redirect to "/sellers/#{@seller.id}"
+      else
+        erb :'sellers/edit_seller'
+      end
     else
       flash[:message] = "**** Please log in first ****"
       redirect to '/users/login'

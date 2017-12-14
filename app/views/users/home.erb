@@ -1,12 +1,23 @@
 <h1>Welcome to your home page, <%= @user.username %>. (<a href="/users/logout">Log Out</a>) </h1>
 
+<% if flash[:message] %>
+  <h2> <%= flash[:message] %> </h2>
+<% end %>
+
 <h2>Here are your Sellers: </h2>
 
     Name - Start Date - Edit
 
-    <p><a href="/sellers/new">Add Seller</a> </p> 
+    <p><a href="/sellers/new">Add Seller</a> </p>
+
 
 <h2>Here are your Product Lines: </h2>
+
+
+Other Sellers
+
+ - Name - Start Date - Entered by
+Other product lines
 
 Info - [including inventory] - Edit
 

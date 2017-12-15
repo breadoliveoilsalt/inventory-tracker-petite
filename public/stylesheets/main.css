@@ -51,6 +51,15 @@
     margin-bottom: 18px;
   }
 
+  table, th, td {               /* I added */
+      border: 1px solid black;
+  }
+
+  th, td {
+    width: 200px;
+    height: 25px;
+  }
+
   .main {
     overflow: hidden;
   }

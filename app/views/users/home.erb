@@ -1,24 +1,62 @@
-<h1>Welcome to your home page, <%= @user.username %>. (<a href="/users/logout">Log Out</a>) </h1>
+  <h1>Welcome to your home page, <%= current_user.username %>. (<a href="/users/logout">Log Out</a>) </h1>
 
-<% if flash[:message] %>
-  <h2> <%= flash[:message] %> </h2>
-<% end %>
+  <% if flash[:message] %>
+    <h2> <%= flash[:message] %> </h2>
+  <% end %>
 
-<h2>Here are your Sellers: </h2>
+  <h2></h2>
 
-    Name - Start Date - Edit
+  <h2>Below are your Sellers. <a href="/sellers/new">Add a Seller here.</a>  </h2>
 
-    <p><a href="/sellers/new">Add Seller</a> </p>
+      <table>
+        <tr>
+          <th> Name </th>
+          <th> Start Date </th>
+          <th> Edit Link</th>
+        </tr>
+
+        <% current_user.sellers.all.each do |seller| %>
+          <tr>
+              <th> <a href="/sellers/<%= seller.id %>"> <%= seller.seller_name %> </a> </th>
+              <th> <%= seller.readable_start_date %> </th>
+              <th> <a href="/sellers/<%= seller.id %>/edit">Edit</a> </th>
+          </tr>
+        <% end %>
+      </table>
 
 
-<h2>Here are your Product Lines: </h2>
+  <h2></h2>
 
+  <h2>Here are your Product Lines: </h2>
 
-Other Sellers
+  Other Sellers
 
- - Name - Start Date - Entered by
-Other product lines
+   - Name - Start Date - Entered by
+  Other product lines
 
-Info - [including inventory] - Edit
+  Info - [including inventory] - Edit
 
-Add Product Line
+  Add Product Line
+  ``
+
+  <h2></h2>
+  <h2>  Below are other Sellers </h2>
+
+      <table>
+        <tr>
+          <th> Name </th>
+          <th> Start Date </th>
+          <th> Entered By </th>
+        </tr>
+
+        <% Seller.all.each do |seller| %>
+          <% if seller.user != current_user %>
+            <tr>
+                <th> <a href="/sellers/<%= seller.id %>"> <%= seller.seller_name %> </a> </th>
+                <th> <%= seller.readable_start_date %> </th>
+                <th> <%= seller.user.username %> </th>
+            </tr>
+          <% end %>
+        <% end %>
+
+      </table>

@@ -40,7 +40,6 @@ class UsersController < ApplicationController
 
   get '/users/home' do
     if logged_in?
-      @user = current_user
       erb :"users/home"
     else
       flash[:message] = "**** Please log in first ****"

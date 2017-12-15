@@ -34,40 +34,48 @@
 
         <tr>
           <th> Name </th>
-          <th> Cost to Make Per Piece </th>
-          <th> Sale Price Per Piece </th>
-          <th> Inventory Amount </th>
+          <th> Inventory Available </th>
           <th> Edit or Add Inventory </th>
         </tr>
 
         <% current_user.product_lines.all.each do |product_line| %>
           <tr>
               <th> <a href="#"> <%= product_line.product_name %> </a> </th>
-              <th> <%= product_line.cost_to_make %> </th>
-              <th> <%= product_line.sale_price %> </th>
-              <th> <%= product_line.product_items.count %> </th>
+              <th> <%= product_line.inventory_available %> </th>
               <th> <a href="#">Edit/Add Inventory</a> </th>
           </tr>
 
         <% end %>
 
+      </table>
 
+  <h2></h2>
 
+  <h2>Below are other Product Lines from other Users. </h2>
+
+      <table>
+
+        <tr>
+          <th> Name </th>
+          <th> Inventory Available </th>
+          <th> Entered By </th>
+        </tr>
+
+        <% ProductLine.all.each do |product_line| %>
+          <% if product_line.user != current_user %>
+            <tr>
+                <th> <a href="#"> <%= product_line.product_name %> </a> </th>
+                <th> <%= product_line.inventory_available %> </th>
+                <th> <%= product_line.user.username %> </th>
+            </tr>
+          <% end %>
+        <% end %>
 
       </table>
 
 
-  Other Sellers
-
-   - Name - Start Date - Entered by
-  Other product lines
-
-  Info - [including inventory] - Edit
-
-  Add Product Line
-  ``
-
   <h2></h2>
+
   <h2>  Below are other Sellers </h2>
 
       <table>

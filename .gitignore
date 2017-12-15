@@ -3,5 +3,6 @@ scraps/
 
 spec/
 
+*.sqlite*
 *.sqlite3
 *.db

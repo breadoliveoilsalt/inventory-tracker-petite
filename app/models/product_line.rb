@@ -9,7 +9,7 @@ class ProductLine < ActiveRecord::Base
   def inventory_available
     amount_available = 0
     self.product_items.each do |item|
-      if item.sold == 0
+      if item.sold == false
         amount_available += 1
       end
     end

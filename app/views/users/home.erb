@@ -1,10 +1,12 @@
   <h1>Welcome to your home page, <%= current_user.username %>. (<a href="/users/logout">Log Out</a>) </h1>
+  <h2></h2>
 
   <% if flash[:message] %>
     <h2> <%= flash[:message] %> </h2>
+    <h2></h2>
   <% end %>
 
-  <h2></h2>
+
 
   <h2>Below are your Sellers. <a href="/sellers/new">Add a Seller here.</a>  </h2>
 
@@ -40,7 +42,7 @@
 
         <% current_user.product_lines.all.each do |product_line| %>
           <tr>
-              <th> <a href="#"> <%= product_line.product_name %> </a> </th>
+              <th> <a href="/product_lines/<%= product_line.id %>"> <%= product_line.product_name %> </a> </th>
               <th> <%= product_line.inventory_available %> </th>
               <th> <a href="#">Edit/Add Inventory</a> </th>
           </tr>

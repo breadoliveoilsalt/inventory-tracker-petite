@@ -12,11 +12,10 @@ class ProductLinesController < ApplicationController
   end
 
   post '/product_lines' do # post request to add a new product line
-    binding.pry
     if name_blank?
       flash[:message] = "**** Error: Please make sure name is entered or inventory is a valid number ****"
       redirect to '/product_lines/new'
-    elsif inventory_error? # FIX THIS DOESN'T WORK
+    elsif inventory_error?
       flash[:message] = "**** Error: Please enter a valid number for the inventory ****"
       redirect to '/product_lines/new'
     else
@@ -63,7 +62,7 @@ class ProductLinesController < ApplicationController
     if name_blank?
       flash[:message] = "**** Error: Please enter at least a name **** "
       redirect to "product_lines/#{product_line.id}/edit"
-    elsif inventory_error? #FIX THIS DOESN'T WORK
+    elsif inventory_error?
       flash[:message] = "**** Error: Please enter a valid number for the inventory ****"
       redirect to "product_lines/#{product_line.id}/edit"
     else

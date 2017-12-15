@@ -19,9 +19,9 @@
 
         <% current_user.sellers.all.each do |seller| %>
           <tr>
-              <th> <a href="/sellers/<%= seller.id %>"> <%= seller.seller_name %> </a> </th>
-              <th> <%= seller.readable_start_date %> </th>
-              <th> <a href="/sellers/<%= seller.id %>/edit">Edit</a> </th>
+              <td> <a href="/sellers/<%= seller.id %>"> <%= seller.seller_name %> </a> </td>
+              <td> <%= seller.readable_start_date %> </td>
+              <td> <a href="/sellers/<%= seller.id %>/edit">Edit</a> </td>
           </tr>
         <% end %>
 
@@ -42,9 +42,9 @@
 
         <% current_user.product_lines.all.each do |product_line| %>
           <tr>
-              <th> <a href="/product_lines/<%= product_line.id %>"> <%= product_line.product_name %> </a> </th>
-              <th> <%= product_line.inventory_available %> </th>
-              <th> <a href="/product_lines/<%= product_line.id %>/edit">Edit/Add Inventory</a> </th>
+              <td> <a href="/product_lines/<%= product_line.id %>"> <%= product_line.product_name %> </a> </td>
+              <td> <%= product_line.inventory_available %> </td>
+              <td> <a href="/product_lines/<%= product_line.id %>/edit">Edit/Add Inventory</a> </td>
           </tr>
 
         <% end %>
@@ -66,9 +66,9 @@
         <% ProductLine.all.each do |product_line| %>
           <% if product_line.user != current_user %>
             <tr>
-                <th> <a href="#"> <%= product_line.product_name %> </a> </th>
-                <th> <%= product_line.inventory_available %> </th>
-                <th> <%= product_line.user.username %> </th>
+                <td> <a href="/product_lines/<%= product_line.id %>"> <%= product_line.product_name %> </a> </td>
+                <td> <%= product_line.inventory_available %> </td>
+                <td> <%= product_line.user.username %> </td>
             </tr>
           <% end %>
         <% end %>
@@ -90,9 +90,9 @@
         <% Seller.all.each do |seller| %>
           <% if seller.user != current_user %>
             <tr>
-                <th> <a href="/sellers/<%= seller.id %>"> <%= seller.seller_name %> </a> </th>
-                <th> <%= seller.readable_start_date %> </th>
-                <th> <%= seller.user.username %> </th>
+                <td> <a href="/sellers/<%= seller.id %>"> <%= seller.seller_name %> </a> </td>
+                <td> <%= seller.readable_start_date %> </td>
+                <td> <%= seller.user.username %> </td>
             </tr>
           <% end %>
         <% end %>

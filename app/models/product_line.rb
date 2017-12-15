@@ -16,4 +16,10 @@ class ProductLine < ActiveRecord::Base
     amount_available
   end
 
+  def create_inventory(num)
+    num.times do
+      ProductItem.create(product_line_id: product_line.id, user_id: current_user.id)
+    end
+  end
+
 end

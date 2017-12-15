@@ -30,7 +30,7 @@
 
   <h2></h2>
 
-  <h2>Below are your Product Lines.  <a href="#">Add a Product Line here.</a> </h2>
+  <h2>Below are your Product Lines.  <a href="/product_lines/new">Add a Product Line here.</a> </h2>
 
       <table>
 
@@ -44,7 +44,7 @@
           <tr>
               <th> <a href="/product_lines/<%= product_line.id %>"> <%= product_line.product_name %> </a> </th>
               <th> <%= product_line.inventory_available %> </th>
-              <th> <a href="#">Edit/Add Inventory</a> </th>
+              <th> <a href="/product_lines/<%= product_line.id %>/edit">Edit/Add Inventory</a> </th>
           </tr>
 
         <% end %>

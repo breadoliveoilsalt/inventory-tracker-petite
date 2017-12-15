@@ -1,0 +1,16 @@
+You made it to edit product line -- THIS NEEDS TO BE CLEANED UP!
+
+<h1> <a href="/users/home">Home</a> || <a href="/users/logout">Log Out, <%= current_user.username %></a> </h1>
+<h2></h2>
+
+<h1> Product Line Name: <%= @product_line.product_name %>
+<h2></h2>
+
+<h2> Inventory Available: <%= @product_line.inventory_available %> </h2>
+<h2> Total Inventory Created Since Inception: <%= @product_line.product_items.all.count %> </h2>
+
+    <% if flash[:message] %>
+      <h3> <%= flash[:message] %> </h3>
+    <% end %>
+
+<h2> <a href="/product_lines/<%= @product_line.id %>/edit">Edit Product Line or Add Inventory</a> </h2>

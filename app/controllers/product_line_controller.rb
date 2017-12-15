@@ -14,17 +14,18 @@ class ProductLinesController < ApplicationController
   post '/product_lines' do # post request to add a new product line
 
     if name_blank?
-      flash[:message] = "**** Error: Please enter at least a name ****"
+      flash[:message] = "**** Error: Please make sure name is entered or inventory is a valid number ****"
+      redirect to '/product_lines/new'
+    elsif inventory_error?
+      flash[:message] = "**** Error: Please enter a valid number for the inventory ****"
       redirect to '/product_lines/new'
     else
       product_line = ProductLine.create(params[:product_line])
       product_line.user = current_user
-      # if params[:inventory]
-      #   product_line.create_inventory
-      # end
-
+      if params[:inventory]
+        ProductItem.create_inventory(product_line, params[:inventory])
+      end
       product_line.save
-
     end
     redirect to "users/home" #"/sellers/#{seller.id}"
 
@@ -75,6 +76,10 @@ class ProductLinesController < ApplicationController
 
     def name_blank?
       params[:product_line][:product_name] == ""
+    end
+
+    def inventory_error?
+      params[:inventory].to_i.is_a? Float || params[:inventory] != "" && params[inventory].to_i == 0
     end
 
   end # end of helpers

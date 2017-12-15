@@ -12,7 +12,7 @@
         <tr>
           <th> Name </th>
           <th> Start Date </th>
-          <th> Edit Link</th>
+          <th> Edit Link </th>
         </tr>
 
         <% current_user.sellers.all.each do |seller| %>
@@ -22,12 +22,40 @@
               <th> <a href="/sellers/<%= seller.id %>/edit">Edit</a> </th>
           </tr>
         <% end %>
+
       </table>
 
 
   <h2></h2>
 
-  <h2>Here are your Product Lines: </h2>
+  <h2>Below are your Product Lines.  <a href="#">Add a Product Line here.</a> </h2>
+
+      <table>
+
+        <tr>
+          <th> Name </th>
+          <th> Cost to Make Per Piece </th>
+          <th> Sale Price Per Piece </th>
+          <th> Inventory Amount </th>
+          <th> Edit or Add Inventory </th>
+        </tr>
+
+        <% current_user.product_lines.all.each do |product_line| %>
+          <tr>
+              <th> <a href="#"> <%= product_line.product_name %> </a> </th>
+              <th> <%= product_line.cost_to_make %> </th>
+              <th> <%= product_line.sale_price %> </th>
+              <th> <%= product_line.product_items.count %> </th>
+              <th> <a href="#">Edit/Add Inventory</a> </th>
+          </tr>
+
+        <% end %>
+
+
+
+
+      </table>
+
 
   Other Sellers
 

@@ -12,7 +12,7 @@ class ProductLinesController < ApplicationController
   end
 
   post '/product_lines' do # post request to add a new product line
-
+    binding.pry
     if name_blank?
       flash[:message] = "**** Error: Please make sure name is entered or inventory is a valid number ****"
       redirect to '/product_lines/new'
@@ -27,11 +27,11 @@ class ProductLinesController < ApplicationController
       end
       product_line.save
     end
-    redirect to "users/home" #"/sellers/#{seller.id}"
+    redirect to "/product_lines/#{product_line.id}"
 
   end
 
-  get '/product_lines/:id' do
+  get '/product_lines/:id' do # get request to show a product line
     if logged_in?
       @product_line = ProductLine.find(params[:id])
       erb :'product_lines/show_product_line'
@@ -84,23 +84,12 @@ class ProductLinesController < ApplicationController
 
   helpers do
 
-    # def valid_date?(date_data)
-    #   date_data[:year].to_i.between?(1979, 2100) && create_date_object(date_data)
-    # end
-    #
-    # def create_date_object(date_data)
-    #   year = date_data[:year].to_i
-    #   month = date_data[:month].to_i
-    #   day = date_data[:day].to_i
-    #   Date.new(year, month, day)
-    # end
-
     def name_blank?
       params[:product_line][:product_name] == ""
     end
 
     def inventory_error?
-      params[:inventory].to_i.is_a? Float || params[:inventory] != "" && params[inventory].to_i == 0
+      params[:inventory] != "" && params[:inventory].to_i == 0
     end
 
   end # end of helpers

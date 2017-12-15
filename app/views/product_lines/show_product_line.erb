@@ -6,7 +6,7 @@
   <h2></h2>
 <% end %>
 
-<h1> Product Line Name: <%= @product_line.product_name %>.
+<h1> Product Line Name: <%= @product_line.product_name %>
 
 <h2></h2>
 <h2><a href="/product_lines/<%= @product_line.id %>/edit">Edit Product Line or Add Inventory</a>.</h2>
@@ -14,5 +14,27 @@
 <h2> Total Inventory Created Since Inception: <%= @product_line.product_items.all.count %> </h2>
 
 <table>
-  
+  <tr>
+    <th> Product ID # </th>
+        <!-- Radio: -->
+    <th> Sold </th>
+        <!-- Drop Down: -->
+    <th>Seller</th>
+  </tr>
+
+  <% @product_line.product_items.all.each do |item| %>
+    <tr>
+
+      <td> <%= item.id %> </td>
+
+      <% if item.sold == true %>
+        <td>Yes</td>
+      <% else %>
+        <td> No </td>
+      <% end %>
+
+      <td> <%= item.seller %> </td>
+
+    </tr>
+  <% end %>
 </table>

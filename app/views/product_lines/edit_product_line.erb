@@ -1,16 +1,37 @@
-You made it to edit product line -- THIS NEEDS TO BE CLEANED UP!
 
 <h1> <a href="/users/home">Home</a> || <a href="/users/logout">Log Out, <%= current_user.username %></a> </h1>
 <h2></h2>
 
+
+    <% if flash[:message] %>
+      <h3> <%= flash[:message] %> </h3>
+      <h2></h2>
+    <% end %>
+
+<h2>Edit the Product Line:</h2>
+
+<form class="" action="/product_lines/<%= @product_line.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+
+  <h3> Product Name: <input type="text" name="product_line[product_name]" value="<%= @product_line.product_name %>"> </h3>
+  <h3> Product Description (optional): <input type="text" name="product_line[description]" value="<%= @product_line.description %>"> </h3>
+  <h3> Current Inventory Available: <%= @product_line.inventory_available %> </h3>
+  <h3> Add More Inventory (optional): <input type="text" name="inventory" value=""> </h3>
+
+
+
+  <input type="submit" name="" value="Update Product Line ">
+
+</form>
+
+<!--
+
+*****
 <h1> Product Line Name: <%= @product_line.product_name %>
 <h2></h2>
 
 <h2> Inventory Available: <%= @product_line.inventory_available %> </h2>
-<h2> Total Inventory Created Since Inception: <%= @product_line.product_items.all.count %> </h2>
+<h2> Total Inventory Created Since Inception: <%= @product_line.product_items.all.count %> </h2> -->
 
-    <% if flash[:message] %>
-      <h3> <%= flash[:message] %> </h3>
-    <% end %>
 
-<h2> <a href="/product_lines/<%= @product_line.id %>/edit">Edit Product Line or Add Inventory</a> </h2>
+<!-- <h2> <a href="/product_lines/<%= @product_line.id %>/edit">Edit Product Line or Add Inventory</a> </h2> -->

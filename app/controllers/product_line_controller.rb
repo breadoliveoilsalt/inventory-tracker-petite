@@ -16,13 +16,13 @@ class ProductLinesController < ApplicationController
     if name_blank?
       flash[:message] = "**** Error: Please make sure name is entered or inventory is a valid number ****"
       redirect to '/product_lines/new'
-    elsif inventory_error?
+    elsif inventory_error? # FIX THIS DOESN'T WORK
       flash[:message] = "**** Error: Please enter a valid number for the inventory ****"
       redirect to '/product_lines/new'
     else
       product_line = ProductLine.create(params[:product_line])
       product_line.user = current_user
-      if params[:inventory]
+      if params[:inventory] != ""
         ProductItem.create_inventory(product_line, params[:inventory])
       end
       product_line.save
@@ -41,22 +41,38 @@ class ProductLinesController < ApplicationController
     end
   end
 
-
-
-  get '/product_lines/:id/edit' do #### FIX!!
+  get '/product_lines/:id/edit' do # get request to edit a product line
     @product_line = ProductLine.find(params[:id])
     if logged_in?
       # Immediately below is the gatekeeper preventing users from editing or deleting what
       # they did not create
       if @product_line.user != current_user
-        flash[:message] = "**** You do not have permission to edit this seller ****"
-        redirect to "/sellers/#{@seller.id}"
+        flash[:message] = "**** You do not have permission to edit this Product Line ****"
+        redirect to "/product_lines/#{@product_line.id}"
       else
         erb :'product_lines/edit_product_line'
       end
     else
       flash[:message] = "**** Please log in first ****"
       redirect to '/users/login'
+    end
+  end
+
+  patch '/product_lines/:id' do # patch request to edit a product line
+    product_line = ProductLine.find(params[:id])
+    if name_blank?
+      flash[:message] = "**** Error: Please enter at least a name **** "
+      redirect to "product_lines/#{product_line.id}/edit"
+    elsif inventory_error? #FIX THIS DOESN'T WORK
+      flash[:message] = "**** Error: Please enter a valid number for the inventory ****"
+      redirect to "product_lines/#{product_line.id}/edit"
+    else
+      product_line.update(params[:product_line])
+      if params[:inventory] != ""
+        ProductItem.create_inventory(product_line, params[:inventory])
+      end
+      product_line.save
+      redirect to "/product_lines/#{product_line.id}"
     end
   end
 

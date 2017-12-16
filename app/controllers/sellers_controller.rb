@@ -1,14 +1,12 @@
 class SellersController < ApplicationController
 
-
-  get '/sellers/new' do # request for form to create new seller
+  get '/sellers/new' do # request for form to create a new seller
     if logged_in?
       erb :"/sellers/create_seller"
     else
       flash[:message] = "**** Please log in first ****"
       redirect to '/users/login'
     end
-
   end
 
   post '/sellers' do # post request to add a new seller
@@ -40,9 +38,7 @@ class SellersController < ApplicationController
   get '/sellers/:id/edit' do
     @seller = Seller.find(params[:id])
     if logged_in?
-      # Immediately below is the gatekeeper preventing users from editing or deleting sellers 
-      # that they did not create
-      if @seller.user != current_user
+      if @seller.user != current_user # This prevents users from editing/deleting what they did not create
         flash[:message] = "**** You do not have permission to edit this seller ****"
         redirect to "/sellers/#{@seller.id}"
       else
@@ -65,7 +61,7 @@ class SellersController < ApplicationController
         seller.start_date = create_date_object(params[:start_date])
       else
         seller.start_date = nil
-        flash[:message] = " **** Note: Start date was not entered or was invalid. Click edit to add a start date ****"
+        flash[:message] = "**** Note: Start date was not entered or was invalid. Click edit to add a start date ****"
       end
       seller.save
       redirect to "/sellers/#{seller.id}"
@@ -75,6 +71,7 @@ class SellersController < ApplicationController
   delete '/sellers/:id/delete' do # delete request to edit seller
     seller = Seller.find(params[:id])
     seller.delete
+    flash[:message] = "**** Seller #{seller.name} deleted ****"
     redirect to '/users/home'
   end
 

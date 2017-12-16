@@ -1,5 +1,3 @@
-require './config/environment'
-# Problaby don't need the line above, no?
 
 class ApplicationController < Sinatra::Base
 
@@ -8,7 +6,6 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "lubbalubba"
-    #use Rack::Flash # I added here
     register Sinatra::Flash
   end
 

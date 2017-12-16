@@ -1,14 +1,12 @@
 class ProductLinesController < ApplicationController
 
   get '/product_lines/new' do # request for form to create new product line
-
     if logged_in?
       erb :"/product_lines/create_product_line"
     else
       flash[:message] = "**** Please log in first ****"
       redirect to '/users/login'
     end
-
   end
 
   post '/product_lines' do # post request to add a new product line
@@ -27,7 +25,6 @@ class ProductLinesController < ApplicationController
       product_line.save
     end
     redirect to "/product_lines/#{product_line.id}"
-
   end
 
   get '/product_lines/:id' do # get request to show a product line
@@ -43,9 +40,7 @@ class ProductLinesController < ApplicationController
   get '/product_lines/:id/edit' do # get request to edit a product line
     @product_line = ProductLine.find(params[:id])
     if logged_in?
-      # Immediately below is the gatekeeper preventing users from editing or deleting what
-      # they did not create
-      if @product_line.user != current_user
+      if @product_line.user != current_user # This prevents users from editing/deleting what they did not create
         flash[:message] = "**** You do not have permission to edit this Product Line ****"
         redirect to "/product_lines/#{@product_line.id}"
       else

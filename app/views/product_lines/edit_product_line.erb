@@ -2,7 +2,6 @@
 <h1> <a href="/users/home">Home</a> || <a href="/users/logout">Log Out, <%= current_user.username %></a> </h1>
 <h2></h2>
 
-
     <% if flash[:message] %>
       <h3> <%= flash[:message] %> </h3>
       <h2></h2>
@@ -28,8 +27,6 @@
   <h3> Current Inventory Available: <%= @product_line.inventory_available %> </h3>
   <h3> Add More Inventory (optional): <input type="text" name="inventory" value=""> </h3>
 
-
-
   <input type="submit" name="" value="Update Product Line ">
 
 </form>
@@ -48,7 +45,7 @@
   </tr>
 
 
-  <!-- Beginning of Form to Edit Inventory -- basically, for each row, there are two forms -- one to edit and inventory item and one to delete the inventory item -->
+  <!-- Beginning of Form to Edit Inventory. Basically, for each row with an inventory item, there are two forms: one to edit an inventory item and one to delete the inventory item -->
 
   <% @product_line.product_items.all.each do |item| %>
 

@@ -8,6 +8,16 @@
       <h2></h2>
     <% end %>
 
+<h2>Delete the Product Line:</h2>
+
+<form class="" action="/product_lines/<%= @product_line.id %>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+
+  <input type="submit" name="" value="Delete Product Line">
+</form>
+
+<h2></h2>
+
 <h2>Edit the Product Line:</h2>
 
 <form class="" action="/product_lines/<%= @product_line.id %>" method="post">
@@ -24,24 +34,51 @@
 
 </form>
 
-<h3></h3>
 <h2></h2>
 
+<h2>Edit the Inventory:</h2>
 
-<form class="" action="/product_lines/<%= @product_line.id %>/delete" method="post">
-  <input id="hidden" type="hidden" name="_method" value="delete">
+<table>
+  <tr>
+    <th> Product ID # </th>
+    <th> Sold </th>
+    <th> Seller </th>
+    <th> Update </th>
+    <th> Delete </th>
+  </tr>
 
-  <input type="submit" name="" value="Delete Product Line">
-</form>
+  <% @product_line.product_items.all.each do |item| %>
 
-<!--
+  <form class="" action="/product_items/<%= item.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
 
-*****
-<h1> Product Line Name: <%= @product_line.product_name %>
-<h2></h2>
+    <tr>
 
-<h2> Inventory Available: <%= @product_line.inventory_available %> </h2>
-<h2> Total Inventory Created Since Inception: <%= @product_line.product_items.all.count %> </h2> -->
+      <td> <%= item.id %> </td>
 
 
-<!-- <h2> <a href="/product_lines/<%= @product_line.id %>/edit">Edit Product Line or Add Inventory</a> </h2> -->
+      <td>
+        <input type="radio" name="sold" value="<%= item.sold %>" <%='checked' if item.sold == true %>>Yes</input>
+        <input type="radio" name="sold" value="<%= item.sold %>" <%='checked' if item.sold == false %>>No</input>
+      </td>
+
+      <td> More stuff</td>
+
+      <td>  <input type="submit" name="" value="Update"> </td>
+
+    </form>
+
+      <td>
+         <form class="" action="/product_items/<%= item.id %>/delete" method="post">
+           <input id="hidden" type="hidden" name="_method" value="delete">
+
+           <input id="inv_delete" type="submit" name="" value="Delete">
+         </form>
+      </td>
+
+
+    </tr>
+
+  <% end %>
+
+</table>

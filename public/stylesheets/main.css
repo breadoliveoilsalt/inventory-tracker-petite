@@ -66,6 +66,10 @@
 
   }
 
+  form {
+    margin-bottom: 15px;
+  }
+
   .main {
     overflow: hidden;
   }
@@ -97,6 +101,10 @@
     padding-top: 20px;
   }
 }
+
+  #inv-delete {
+    margin-top: 10px;
+  }
 
 @media screen and (max-width: 600px) {
   .wrapper {

@@ -66,6 +66,7 @@ class ProductLinesController < ApplicationController
         ProductItem.create_inventory(product_line, params[:inventory])
       end
       product_line.save
+      flash[:message] = "**** Product Line updated ****"
       redirect to "/product_lines/#{product_line.id}"
     end
   end
@@ -76,6 +77,7 @@ class ProductLinesController < ApplicationController
       item.delete
     end
     product_line.delete
+    flash[:message] = "**** Product Line #{product_line.product_name} deleted ****"
     redirect to '/users/home'
   end
 

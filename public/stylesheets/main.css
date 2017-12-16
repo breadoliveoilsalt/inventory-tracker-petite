@@ -63,11 +63,10 @@
     width: 200px;
     height: 25px;
     text-align: center;
-
   }
 
   form {
-    margin-bottom: 15px;
+    margin: 15px;
   }
 
   .main {
@@ -100,11 +99,10 @@
     margin-top: 20px;
     padding-top: 20px;
   }
+
 }
 
-  #inv-delete {
-    margin-top: 10px;
-  }
+
 
 @media screen and (max-width: 600px) {
   .wrapper {

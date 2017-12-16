@@ -47,6 +47,9 @@
     <th> Delete </th>
   </tr>
 
+
+  <!-- Beginning of Form to Edit Inventory -- basically, for each row, there are two forms -- one to edit and inventory item and one to delete the inventory item -->
+
   <% @product_line.product_items.all.each do |item| %>
 
   <form class="" action="/product_items/<%= item.id %>" method="post">
@@ -54,20 +57,34 @@
 
     <tr>
 
+      <!-- First column -->
+
       <td> <%= item.id %> </td>
 
-
+      <!-- Second column -->
       <td>
-        <input type="radio" name="sold" value="<%= item.sold %>" <%='checked' if item.sold == true %>>Yes</input>
-        <input type="radio" name="sold" value="<%= item.sold %>" <%='checked' if item.sold == false %>>No</input>
+        <input type="radio" name="product_item[sold]" value="true" <%='checked' if item.sold == true %> >Yes</input>
+        <input type="radio" name="product_item[sold]" value="false" <%='checked' if item.sold == false %> >No</input>
       </td>
 
-      <td> More stuff</td>
+      <!-- Third column -->
+      <td>
+        <select class="" name="product_item[seller_id]">
 
+          <% item.user.sellers.all.each do |seller| %>
+            <option value="<%= seller.id %>" <%= 'selected' if item.seller == seller %> > <%= seller.seller_name %> </option>
+          <% end %>
+
+        </select>
+      </td>
+
+      <!-- Fourth column -->
       <td>  <input type="submit" name="" value="Update"> </td>
+
 
     </form>
 
+      <!-- Fifth column -->
       <td>
          <form class="" action="/product_items/<%= item.id %>/delete" method="post">
            <input id="hidden" type="hidden" name="_method" value="delete">
@@ -75,7 +92,6 @@
            <input id="inv_delete" type="submit" name="" value="Delete">
          </form>
       </td>
-
 
     </tr>
 

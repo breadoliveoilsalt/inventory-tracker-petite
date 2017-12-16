@@ -72,6 +72,9 @@ class ProductLinesController < ApplicationController
 
   delete '/product_lines/:id/delete' do # delete request to delete product line
     product_line = ProductLine.find(params[:id])
+    product_line.product_items.each do |item|
+      item.delete
+    end
     product_line.delete
     redirect to '/users/home'
   end

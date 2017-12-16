@@ -34,14 +34,14 @@
         <tr>
           <th> Name </th>
           <th> Inventory Available </th>
-          <th> Edit or Add Inventory </th>
+          <th> Edit Product or Inventory </th>
         </tr>
 
         <% current_user.product_lines.all.each do |product_line| %>
           <tr>
               <td> <a href="/product_lines/<%= product_line.id %>"> <%= product_line.product_name %> </a> </td>
               <td> <%= product_line.inventory_available %> </td>
-              <td> <a href="/product_lines/<%= product_line.id %>/edit">Edit/Add Inventory</a> </td>
+              <td> <a href="/product_lines/<%= product_line.id %>/edit">Edit Product or Inventory</a> </td>
           </tr>
 
         <% end %>

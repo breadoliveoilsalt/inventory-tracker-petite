@@ -9,6 +9,6 @@ use Rack::MethodOverride
 use UsersController
 use SellersController
 use ProductLinesController
-use ProductItemsController
+use InventoryItemsController
 
 run ApplicationController

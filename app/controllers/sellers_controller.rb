@@ -70,8 +70,8 @@ class SellersController < ApplicationController
 
   delete '/sellers/:id/delete' do # delete request to edit seller
     seller = Seller.find(params[:id])
+    flash[:message] = "**** Seller #{seller.seller_name} deleted ****"
     seller.delete
-    flash[:message] = "**** Seller #{seller.name} deleted ****"
     redirect to '/users/home'
   end
 

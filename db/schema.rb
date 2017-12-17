@@ -11,6 +11,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20171212233325) do
+
+  create_table "inventory_items", force: :cascade do |t|
+    t.string   "seller"
+    t.boolean  "sold",            default: false, null: false
+    t.integer  "user_id"
+    t.integer  "seller_id"
+    t.integer  "product_line_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "product_lines", force: :cascade do |t|
+    t.string   "product_name"
+    t.string   "description"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "seller_product_lines", force: :cascade do |t|
+    t.integer  "seller_id"
+    t.integer  "product_line_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sellers", force: :cascade do |t|
+    t.string   "seller_name"
+    t.date     "start_date"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "username"
+    t.string   "password_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

@@ -1,5 +1,5 @@
-class AddSoldColToProductItems < ActiveRecord::Migration
+class AddSoldColToInventoryItems < ActiveRecord::Migration
   def change
-    add_column :product_items, :sold, :boolean, null: false, default: false
+    add_column :inventory_items, :sold, :boolean, null: false, default: false
   end
 end

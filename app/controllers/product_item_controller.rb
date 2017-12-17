@@ -1,8 +1,8 @@
-class ProductItemsController < ApplicationController
+class InventoryItemsController < ApplicationController
 
-  patch '/product_items/:id' do # patch request to edit an inventory item
-    item = ProductItem.find(params[:id])
-    item.update(params[:product_item])
+  patch '/inventory_items/:id' do # patch request to edit an inventory item
+    item = InventoryItem.find(params[:id])
+    item.update(params[:inventory_item])
     if item.sold == false
       item.seller = nil
     end
@@ -11,8 +11,8 @@ class ProductItemsController < ApplicationController
     redirect to "/product_lines/#{item.product_line_id}"
   end
 
-  delete '/product_items/:id/delete' do # patch request to edit an inventory item
-    item = ProductItem.find(params[:id])
+  delete '/inventory_items/:id/delete' do # patch request to edit an inventory item
+    item = InventoryItem.find(params[:id])
     item.delete
     flash[:message] = "**** Item \# #{item.id} deleted ****"
     redirect to "/product_lines/#{item.product_line_id}/edit"

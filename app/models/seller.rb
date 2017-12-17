@@ -3,7 +3,7 @@ class Seller < ActiveRecord::Base
   belongs_to :user
   has_many :seller_product_lines
   has_many :product_lines, through: :seller_product_lines
-  has_many :product_items
+  has_many :inventory_items
 
   def readable_start_date
     if !self.start_date

@@ -1,4 +1,4 @@
-class ProductItem < ActiveRecord::Base
+class InventoryItem < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :seller

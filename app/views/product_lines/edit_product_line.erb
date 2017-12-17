@@ -37,7 +37,7 @@
 
 <table>
   <tr>
-    <th> Product ID # </th>
+    <th> Item ID # </th>
     <th> Sold </th>
     <th> Seller </th>
     <th> Update </th>
@@ -47,9 +47,9 @@
 
   <!-- Beginning of Form to Edit Inventory. Basically, for each row with an inventory item, there are two forms: one to edit an inventory item and one to delete the inventory item -->
 
-  <% @product_line.product_items.each do |item| %>
+  <% @product_line.inventory_items.each do |item| %>
 
-  <form class="" action="/product_items/<%= item.id %>" method="post">
+  <form class="" action="/inventory_items/<%= item.id %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
 
     <tr>
@@ -60,13 +60,13 @@
 
       <!-- Second column -->
       <td>
-        <input type="radio" name="product_item[sold]" value="true" <%='checked' if item.sold == true %> >Yes</input>
-        <input type="radio" name="product_item[sold]" value="false" <%='checked' if item.sold == false %> >No</input>
+        <input type="radio" name="inventory_item[sold]" value="true" <%='checked' if item.sold == true %> >Yes</input>
+        <input type="radio" name="inventory_item[sold]" value="false" <%='checked' if item.sold == false %> >No</input>
       </td>
 
       <!-- Third column -->
       <td>
-        <select class="" name="product_item[seller_id]">
+        <select class="" name="inventory_item[seller_id]">
 
           <% item.user.sellers.all.each do |seller| %>
             <option value="<%= seller.id %>" <%= 'selected' if item.seller == seller %> > <%= seller.seller_name %> </option>
@@ -83,7 +83,7 @@
 
       <!-- Fifth column -->
       <td>
-         <form class="" action="/product_items/<%= item.id %>/delete" method="post">
+         <form class="" action="/inventory_items/<%= item.id %>/delete" method="post">
            <input id="hidden" type="hidden" name="_method" value="delete">
 
            <input id="inv_delete" type="submit" name="" value="Delete">

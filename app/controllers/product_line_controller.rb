@@ -20,7 +20,7 @@ class ProductLinesController < ApplicationController
       product_line = ProductLine.create(params[:product_line])
       product_line.user = current_user
       if params[:inventory] != ""
-        ProductItem.create_inventory(product_line, params[:inventory])
+        InventoryItem.create_inventory(product_line, params[:inventory])
       end
       product_line.save
     end
@@ -63,7 +63,7 @@ class ProductLinesController < ApplicationController
     else
       product_line.update(params[:product_line])
       if params[:inventory] != ""
-        ProductItem.create_inventory(product_line, params[:inventory])
+        InventoryItem.create_inventory(product_line, params[:inventory])
       end
       product_line.save
       flash[:message] = "**** Product Line updated ****"
@@ -73,7 +73,7 @@ class ProductLinesController < ApplicationController
 
   delete '/product_lines/:id/delete' do # delete request to delete product line
     product_line = ProductLine.find(params[:id])
-    product_line.product_items.each do |item|
+    product_line.inventory_items.each do |item|
       item.delete
     end
     product_line.delete

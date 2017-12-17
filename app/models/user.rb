@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   has_many :sellers
   has_many :product_lines
-  has_many :product_items
+  has_many :inventory_items
 
 
 end

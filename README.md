@@ -6,9 +6,7 @@ To use this app:
 
 2. In your terminal, `cd` into the parent directory for Inventory Tracker Petite.  
 
-3. In your terminal run:
- - `bundle install`
- - `rake db:migrate`
+3. In your terminal run: `rake db:migrate`
 
  4. Also in your terminal, run `shotgun`.
 

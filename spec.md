@@ -1,5 +1,3 @@
-# Testing that updated repository names sync bw git and github
-
 # Specifications for the Sinatra Assessment
 
 Specs:

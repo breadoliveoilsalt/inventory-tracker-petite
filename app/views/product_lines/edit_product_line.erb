@@ -47,7 +47,7 @@
 
   <!-- Beginning of Form to Edit Inventory. Basically, for each row with an inventory item, there are two forms: one to edit an inventory item and one to delete the inventory item -->
 
-  <% @product_line.product_items.all.each do |item| %>
+  <% @product_line.product_items.each do |item| %>
 
   <form class="" action="/product_items/<%= item.id %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">

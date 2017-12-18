@@ -10,17 +10,17 @@ class ProductLinesController < ApplicationController
   end
 
   post '/product_lines' do # post request to add a new product line
-    if name_blank?
+    if name_blank? # Checks that at least name is provided
       flash[:message] = "**** Error: Please make sure name is entered or inventory is a valid number ****"
       redirect to '/product_lines/new'
-    elsif inventory_error?
+    elsif inventory_error? # Checks that inventory field is not filled with non-numeric characters
       flash[:message] = "**** Error: Please enter a valid number for the inventory ****"
       redirect to '/product_lines/new'
     else
       product_line = ProductLine.create(params[:product_line])
       product_line.user = current_user
       if params[:inventory] != ""
-        InventoryItem.create_inventory(product_line, params[:inventory])
+        InventoryItem.create_inventory(product_line, params[:inventory]) # Creates inventory objects
       end
       product_line.save
     end

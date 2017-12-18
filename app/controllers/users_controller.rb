@@ -9,7 +9,10 @@ class UsersController < ApplicationController
   end
 
   post '/users/signup' do
-    if params[:username] == "" || params[:password] == ""
+    if User.find_by(username: params[:username]) # Checks to see if user exists
+      flash[:message] = "**** Error: That user name already exists. Please chose another. ****"
+      redirect to "/users/signup"
+    elsif params[:username] == "" || params[:password] == "" # Checks to see if both username and password entered
       flash[:message] = "**** Error: Incomplete credentials ****"
       redirect to "/users/signup"
     else
@@ -29,7 +32,7 @@ class UsersController < ApplicationController
 
   post '/users/login' do
     @user = User.find_by(username: params[:username])
-    if @user && @user.authenticate(params[:password])
+    if @user && @user.authenticate(params[:password]) # Checks if username and password are valid
       session[:user_id] = @user.id
       erb :'/users/home'
     else

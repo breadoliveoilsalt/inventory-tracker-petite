@@ -18,6 +18,8 @@ To use this app:
 
  Thanks for stopping by!
 
+ P.S. Shout out and big thanks to thebrianemory for making [corneal](https://github.com/thebrianemory/corneal), a very handy gem for generating a framework for a Sinatra app.  
+
 Contributing:
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/breadoliveoilsalt/inventory-tracker-petite. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant (http://contributor-covenant.org) code of conduct.

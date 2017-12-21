@@ -16,9 +16,14 @@ class UsersController < ApplicationController
       flash[:message] = "**** Error: Incomplete credentials ****"
       redirect to "/users/signup"
     else
-      @user = User.create(params)
-      session[:user_id] = @user.id
-      redirect to "/users/home"
+      @user = User.new(params)
+      if @user.save
+        session[:user_id] = @user.id
+        redirect to "/users/home"
+      else
+        flash[:message] = "**** Error: Trouble saving your account! ****"
+        redirect to "/users/signup"
+      end
     end
   end
 

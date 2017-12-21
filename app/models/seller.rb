@@ -5,6 +5,8 @@ class Seller < ActiveRecord::Base
   has_many :product_lines, through: :seller_product_lines
   has_many :inventory_items
 
+  # before_update :set_start_date
+
   def readable_start_date
     if !self.start_date
       "N/A"

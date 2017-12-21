@@ -30,4 +30,13 @@ class ApplicationController < Sinatra::Base
 
   end
 
+  private
+
+  def authenticate_user!
+    if !logged_in?
+      flash[:message] = "**** Please log in first ****"
+      redirect to '/users/login'
+    end
+  end
+
 end
